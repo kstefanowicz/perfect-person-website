@@ -1,17 +1,13 @@
 <script setup>
 defineProps({
-    title: String,
-    description: String,
-    length: String
+    podcastEpisode: Object
 })
-
 </script>
 
 <template>
     <div>
-        <h3 class="podcast-ep-title"><strong>{{ title }}</strong></h3>
-        <p class="podcast-ep-description">{{ description }}</p>
-        <p class="podcast-ep-length">{{ length }}</p>
+        <h3 class="podcast-ep-title color-blue"><strong>{{ podcastEpisode.title }}</strong></h3>
+        <p class="podcast-ep-length color-blue">{{ podcastEpisode.length }}</p>
     </div>
 
 </template>
