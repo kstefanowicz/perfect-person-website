@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import PodcastEp from '../components/PodcastEp.vue'
 import SiteHeader from '../components/SiteHeader.vue'
-import SelectedEp from '@/components/SelectedEp.vue'
 import { eps } from '../data/podcastData.js'
 import ShowcaseContainer from '@/components/ShowcaseContainer.vue'
 

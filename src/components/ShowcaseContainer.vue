@@ -19,7 +19,8 @@ defineProps({
 
 <style scoped>
 .showcase-frame {
-    width: 80%;
+
+    max-width: 70%px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -36,6 +37,5 @@ defineProps({
 
 .episode-card {
     padding: 2em;
-    max-width: 310px;
 }
 </style>

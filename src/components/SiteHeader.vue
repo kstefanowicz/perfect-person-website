@@ -60,7 +60,6 @@ onMounted(() => {
 .title-svg {
     width: 80%;
     height: 8em;
-    margin-bottom: 2em;
 }
 
 .highlight {
