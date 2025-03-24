@@ -4,9 +4,15 @@ import PodcastEp from '../components/PodcastEp.vue'
 import SiteHeader from '../components/SiteHeader.vue'
 import { eps } from '../data/podcastData.js'
 import ShowcaseContainer from '@/components/ShowcaseContainer.vue'
+import anime from 'animejs'
 
 const podEps = ref(eps)
 const selectedIndex = ref(-1)
+
+const showcaseContainer = ref(null)
+
+const podCardWidth = ref('300px')
+const podCardHeight = ref('200px')
 
 const selectedEpisode = computed(() => {
   if (selectedIndex < 0) return null
@@ -14,11 +20,36 @@ const selectedEpisode = computed(() => {
 })
 
 function selectCard(id) {
+  const prevSelectedCard = document.querySelector(`.podcast-card[data-id="${selectedIndex.value}"]`)
+  const newSelectedCard = document.querySelector(`.podcast-card[data-id="${id}"]`)
+  const cards = document.querySelectorAll('.podcast-card')
+
+  // Lower the previous selection
+  if (selectedIndex.value >= 0) {
+    anime({
+      targets: prevSelectedCard,
+      translateY: '0px',
+      easing: 'easeInQuad',
+      duration: 200
+    })
+  }
+
+  // If selected was clicked, unselect and return
   if (id === selectedIndex.value) {
     selectedIndex.value = -1
     return
   }
+
+  // Else select new 
   selectedIndex.value = id
+
+  // Raise the new selection
+  anime({
+    targets: newSelectedCard,
+    translateY: '-100px',
+    easing: 'easeInOutBack',
+    duration: 400
+  })
 }
 
 function isSelected(id) {
@@ -31,12 +62,14 @@ function isSelected(id) {
     <SiteHeader />
   </header>
   <main>
-    <div v-if="selectedIndex >= 0" class="selected-podcast-container">
-      <ShowcaseContainer :key="selectedEpisode.id" :podcast-episode="selectedEpisode" :class="['selected-ep-card']" />
+    <div v-if="selectedIndex >= 0" class="selected-podcast-container" ref="showcase-container">
+      <ShowcaseContainer :key="selectedEpisode.id" :podcast-episode="selectedEpisode" :class="['selected-ep-card']"
+        @close="selectCard(-1)" />
     </div>
     <div class="podcast-grid">
       <PodcastEp v-for="episode in podEps" :key="episode.id" :podcast-episode="episode"
-        :class="['podcast-card', { 'selected': isSelected(episode.id) }]" @click="selectCard(episode.id)" />
+        :class="['podcast-card', { 'selected': isSelected(episode.id) }]" :data-id="episode.id"
+        @click="selectCard(episode.id)" />
     </div>
   </main>
 
@@ -71,8 +104,8 @@ main {
 
 .podcast-card {
   padding: 20px;
-  width: 400px;
-  height: 300px;
+  width: v-bind(podCardWidth);
+  height: v-bind(podCardHeight);
   border: 2px solid white;
 }
 
@@ -86,7 +119,7 @@ main {
 .selected-podcast-container {
   display: flex;
   align-items: center;
-
+  min-height: 400px
 }
 
 .selected {
@@ -98,7 +131,7 @@ main {
 
 .podcast-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(v-bind(podCardWidth), 1fr));
 
 }
 </style>

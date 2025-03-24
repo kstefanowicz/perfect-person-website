@@ -39,6 +39,10 @@ onMounted(() => {
         <p>A flawless call in advice show about being perfect. Hosted by <strong class="highlight">Miles
                 Bonsignore</strong>
         </p>
+        <div class="nav-links">
+            <RouterLink to="/">Kevin</RouterLink>
+            <RouterLink to="ClaudeView">Claude</RouterLink>
+        </div>
     </div>
 </template>
 
@@ -72,5 +76,13 @@ h1 {
 
 p {
     color: var(--pp-blue)
+}
+
+.nav-links {
+    margin: 2em 2em;
+}
+
+a {
+    margin: 0 .5em;
 }
 </style>

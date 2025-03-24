@@ -13,6 +13,7 @@ defineProps({
             <p class="podcast-ep-description">{{ podcastEpisode.description }}</p>
             <p class="podcast-ep-length color-blue">{{ podcastEpisode.length }}</p>
         </div>
+        <button @click="$emit('close')">Close</button>
     </div>
 
 </template>
