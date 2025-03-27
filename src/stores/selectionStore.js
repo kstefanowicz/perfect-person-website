@@ -2,7 +2,6 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { eps } from '../data/podcastData.js'
 import { useAnimStore } from './animStore.js'
-import ShowcaseContainer from '@/components/ShowcaseContainer.vue'
 
 export const useSelectionStore = defineStore('selection', () => {
 
@@ -29,27 +28,16 @@ export const useSelectionStore = defineStore('selection', () => {
   function selectCard(id) {
 
     console.log("Selecting card with id ", id)
-    const prevId = selectedId.value
-
-
-    const prevSelectedCard = document.querySelector(`.podcast-card[data-id="${prevId}"]`)
-    const newSelectedCard = document.querySelector(`.podcast-card[data-id="${id}"]`)
-    const cards = document.querySelectorAll('.podcast-card')
-
-    if (prevId >= 0) {
-      animStore.lowerCard(prevSelectedCard)
-    }
 
     if (id === selectedId.value || id < 0) {
-      animStore.hideShowcase()
       selectedId.value = -1
+      isShowcaseVisible.value = false
       return
     }
 
     // Else select new
     selectedId.value = id
-    animStore.raiseCard(newSelectedCard)
-    animStore.showShowcase()
+    isShowcaseVisible.value = true
 
   }
 
