@@ -1,60 +1,15 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import PodcastEp from '../components/PodcastEp.vue'
 import SiteHeader from '../components/SiteHeader.vue'
-import { eps } from '../data/podcastData.js'
 import ShowcaseContainer from '@/components/ShowcaseContainer.vue'
-import anime from 'animejs'
+import { useSelectionStore } from '@/stores/selectionStore'
 
-const podEps = ref(eps)
-const selectedIndex = ref(-1)
-
-const showcaseContainer = ref(null)
+const selectionStore = useSelectionStore()
 
 const podCardWidth = ref('300px')
 const podCardHeight = ref('200px')
 
-const selectedEpisode = computed(() => {
-  if (selectedIndex < 0) return null
-  return podEps.value.find(ep => ep.id == selectedIndex.value)
-})
-
-function selectCard(id) {
-  const prevSelectedCard = document.querySelector(`.podcast-card[data-id="${selectedIndex.value}"]`)
-  const newSelectedCard = document.querySelector(`.podcast-card[data-id="${id}"]`)
-  const cards = document.querySelectorAll('.podcast-card')
-
-  // Lower the previous selection
-  if (selectedIndex.value >= 0) {
-    anime({
-      targets: prevSelectedCard,
-      translateY: '0px',
-      easing: 'easeInQuad',
-      duration: 200
-    })
-  }
-
-  // If selected was clicked, unselect and return
-  if (id === selectedIndex.value) {
-    selectedIndex.value = -1
-    return
-  }
-
-  // Else select new 
-  selectedIndex.value = id
-
-  // Raise the new selection
-  anime({
-    targets: newSelectedCard,
-    translateY: '-100px',
-    easing: 'easeInOutBack',
-    duration: 400
-  })
-}
-
-function isSelected(id) {
-  return selectedIndex.value === id
-}
 </script>
 
 <template>
@@ -62,14 +17,15 @@ function isSelected(id) {
     <SiteHeader />
   </header>
   <main>
-    <div v-if="selectedIndex >= 0" class="selected-podcast-container" ref="showcase-container">
-      <ShowcaseContainer :key="selectedEpisode.id" :podcast-episode="selectedEpisode" :class="['selected-ep-card']"
-        @close="selectCard(-1)" />
+    <div v-show="selectionStore.isShowcaseVisible" class="selected-podcast-container" ref="showcaseContainer">
+      <ShowcaseContainer v-show="selectionStore.isShowcaseVisible" :key="selectionStore.selectedEpisode?.id"
+        :podcast-episode="selectionStore.selectedEpisode" :class="['selected-ep-card']"
+        @close="selectionStore.selectCard(-1)" />
     </div>
     <div class="podcast-grid">
-      <PodcastEp v-for="episode in podEps" :key="episode.id" :podcast-episode="episode"
-        :class="['podcast-card', { 'selected': isSelected(episode.id) }]" :data-id="episode.id"
-        @click="selectCard(episode.id)" />
+      <PodcastEp v-for="episode in selectionStore.episodes" :key="episode.id" :podcast-episode="episode"
+        :class="['podcast-card', { 'selected': selectionStore.isSelected(episode.id) }]" :data-id="episode.id"
+        @click="selectionStore.selectCard(episode.id)" />
     </div>
   </main>
 
@@ -118,8 +74,9 @@ main {
 
 .selected-podcast-container {
   display: flex;
+  z-index: 10;
   align-items: center;
-  min-height: 400px
+  min-height: 400px;
 }
 
 .selected {

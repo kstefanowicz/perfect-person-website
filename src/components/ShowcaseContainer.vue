@@ -1,17 +1,25 @@
 <script setup>
-defineProps({
+import { ref, watchEffect } from 'vue';
+
+const props = defineProps({
     podcastEpisode: Object
+})
+
+const showcaseEp = ref(props.podcastEpisode)
+
+watchEffect(() => {
+    showcaseEp.value = props.podcastEpisode
 })
 </script>
 
 <template>
-    <div class="showcase-frame" v-if="podcastEpisode != null">
+    <div class="showcase-frame">
         <div class="youtube-embed">
         </div>
         <div class="episode-card">
-            <h2 class="color-red">{{ podcastEpisode.title }}</h2>
-            <p class="podcast-ep-description">{{ podcastEpisode.description }}</p>
-            <p class="podcast-ep-length color-blue">{{ podcastEpisode.length }}</p>
+            <h2 class="color-red">{{ showcaseEp?.title }}</h2>
+            <p class="podcast-ep-description">{{ showcaseEp?.description }}</p>
+            <p class="podcast-ep-length color-blue">{{ showcaseEp?.length }}</p>
         </div>
         <button @click="$emit('close')">Close</button>
     </div>
