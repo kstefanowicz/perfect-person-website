@@ -34,6 +34,8 @@ function handleCardClick(id) {
   if (id === selectionStore.selectedId || id < 0) {
     // console.log("HIDING showcase")
     animStore.hideShowcase(showcaseContainer.value)
+
+    // wait for animation to finish before unselecting
     setTimeout(() => {
       selectionStore.selectCard(id)
     }, 300)
