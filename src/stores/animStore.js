@@ -5,20 +5,20 @@ import anime from 'animejs'
 export const useAnimStore = defineStore('anim', () => {
 
     function raiseCard(card) {
-        anime({
+        return anime({
             targets: card,
             translateY: '-100px',
-            easing: 'easeInOutBack',
+            easing: 'easeOutExpo',
             duration: 400
         })
     }
 
     function lowerCard(card) {
-        anime({
+        return anime({
             targets: card,
             translateY: '0px',
-            easing: 'easeInQuad',
-            duration: 200
+            easing: 'linear',
+            duration: 400
         })
     }
 

@@ -4,6 +4,8 @@ import { useAnimStore } from '@/stores/animStore';
 import { ref, reactive } from 'vue';
 import anime from 'animejs';
 
+
+
 const numList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const animStore = useAnimStore()
 // init null list same size as numList
@@ -13,21 +15,20 @@ const animCard = (e, isUp) => {
     const card = e.target
     const cardIndex = parseInt(card.getAttribute('data-index'))
 
-    console.log('Animating card ', cardIndex, isUp, animatingCards[cardIndex])
+    // console.log('Animating card ', cardIndex, isUp, animatingCards[cardIndex])
 
-    if (animatingCards[cardIndex]) {
-        anime.remove(card)
-    }
+    /* if (animatingCards[cardIndex]) {
+        } */
+    anime.remove(card)
 
-    const animation = isUp
-        ? animStore.raiseCard(card)
+    isUp ? animStore.raiseCard(card)
         : animStore.lowerCard(card)
 
-    animatingCards[cardIndex] = animation
+    /* animatingCards[cardIndex] = animation
 
     animation.finished.then(() => {
         animatingCards[cardIndex] = null
-    })
+    }) */
 
 }
 
@@ -63,14 +64,14 @@ const animCard = (e, isUp) => {
 }
 
 .num-card {
-    width: 110px;
-    height: 200px;
+    width: 220px;
+    height: 400px;
     border: solid;
     border-color: black;
     display: flex;
     align-content: flex-end;
     justify-content: center;
     font-size: 30px;
-    margin: 10px;
+    margin: 5px;
 }
 </style>
