@@ -2,13 +2,14 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { eps } from '../data/podcastData.js'
 import { useAnimStore } from './animStore.js'
+import { useFirebaseStore } from './firebaseStore.js'
 
 export const useSelectionStore = defineStore('selection', () => {
 
 
-  const animStore = useAnimStore()
+  const firebaseStore = useFirebaseStore()
 
-  const episodes = ref(Array.isArray(eps) ? eps : [])
+  const episodes = computed(() => firebaseStore.episodesAll)
   const selectedId = ref(-1)
   const isShowcaseVisible = ref(false)
   const viewMode = ref('grid')
@@ -27,7 +28,7 @@ export const useSelectionStore = defineStore('selection', () => {
   // If selected was clicked, unselect and return
   function selectCard(id) {
 
-    console.log("Selecting card with id ", id)
+    // console.log("Selecting card with id ", id)
 
     if (id === selectedId.value || id < 0) {
       selectedId.value = -1

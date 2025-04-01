@@ -26,13 +26,13 @@ function handleCardClick(id) {
 
   // If a previous card exists, lower it
   if (prevId >= 0 && prevSelectedCard) {
-    console.log("LOWERING card with id ", prevId)
+    // console.log("LOWERING card with id ", prevId)
     animStore.lowerCard(prevSelectedCard)
   }
 
   // If unselecting, hide showcase
   if (id === selectionStore.selectedId || id < 0) {
-    console.log("HIDING showcase")
+    // console.log("HIDING showcase")
     animStore.hideShowcase(showcaseContainer.value)
     setTimeout(() => {
       selectionStore.selectCard(id)
@@ -42,10 +42,10 @@ function handleCardClick(id) {
 
   // Else raise new card and show showcase
 
-  console.log("RAISING card with id ", id)
+  // console.log("RAISING card with id ", id)
   animStore.raiseCard(newSelectedCard)
 
-  console.log("SHOWING showcase")
+  // console.log("SHOWING showcase")
   if (!selectionStore.isShowcaseVisible) {
     animStore.showShowcase(showcaseContainer.value)
   }

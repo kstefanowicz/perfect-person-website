@@ -35,7 +35,6 @@ export const useFirebaseStore = defineStore('firebase', () => {
                 outList.push(ep.data()))
 
             episodesAll.value = outList
-            console.log("ALL EPISODES: ", ...episodesAll.value)
 
         } catch (err) {
             console.error("ERROR: ", err)
@@ -48,5 +47,5 @@ export const useFirebaseStore = defineStore('firebase', () => {
 
 
 
-    return { firebaseStore, setFirebaseStore }
+    return { firebaseStore, setFirebaseStore, episodesAll }
 })
