@@ -1,7 +1,5 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { eps } from '../data/podcastData.js'
-import { useAnimStore } from './animStore.js'
 import { useFirebaseStore } from './firebaseStore.js'
 
 export const useSelectionStore = defineStore('selection', () => {

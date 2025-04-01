@@ -2,8 +2,7 @@ import { defineStore } from "pinia"
 import { ref } from "vue"
 import 'firebase/firestore'
 import { collection, orderBy, query, getDocs, setDoc, doc } from "firebase/firestore"
-import { eps } from '../data/podcastData.js'
-import { v4 as uuidv4 } from 'uuid'
+
 
 
 export const useFirebaseStore = defineStore('firebase', () => {
