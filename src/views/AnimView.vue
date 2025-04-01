@@ -1,7 +1,35 @@
 <script setup>
 import SiteHeader from '@/components/SiteHeader.vue';
+import { useAnimStore } from '@/stores/animStore';
+import { ref, reactive } from 'vue';
+import anime from 'animejs';
 
 const numList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const animStore = useAnimStore()
+// init null list same size as numList
+const animatingCards = reactive(numList.map(() => null))
+
+const animCard = (e, isUp) => {
+    const card = e.target
+    const cardIndex = parseInt(card.getAttribute('data-index'))
+
+    console.log('Animating card ', cardIndex, isUp, animatingCards[cardIndex])
+
+    if (animatingCards[cardIndex]) {
+        anime.remove(card)
+    }
+
+    const animation = isUp
+        ? animStore.raiseCard(card)
+        : animStore.lowerCard(card)
+
+    animatingCards[cardIndex] = animation
+
+    animation.finished.then(() => {
+        animatingCards[cardIndex] = null
+    })
+
+}
 
 </script>
 
@@ -13,7 +41,8 @@ const numList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         <h1>Playground for animation</h1>
     </div>
     <div class="container">
-        <div v-for="num in numList" class="num-card">
+        <div v-for="(num, index) in numList" class="num-card" :key="index" :data-index="index"
+            @mouseenter="(e) => animCard(e, true)" @mouseleave="(e) => animCard(e, false)">
             {{ num }}
         </div>
     </div>
