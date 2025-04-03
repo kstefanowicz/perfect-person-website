@@ -45,7 +45,7 @@ function handleCardClick(id) {
   // Else raise new card and show showcase
 
   // console.log("RAISING card with id ", id)
-  animStore.raiseCard(newSelectedCard)
+  animStore.raiseCard(newSelectedCard, 100)
 
   // console.log("SHOWING showcase")
   if (!selectionStore.isShowcaseVisible) {

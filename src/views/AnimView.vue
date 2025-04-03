@@ -15,20 +15,20 @@ const animCard = (e, isUp) => {
     const card = e.target
     const cardIndex = parseInt(card.getAttribute('data-index'))
 
-    // console.log('Animating card ', cardIndex, isUp, animatingCards[cardIndex])
 
-    /* if (animatingCards[cardIndex]) {
-        } */
     anime.remove(card)
 
-    isUp ? animStore.raiseCard(card)
+    const animation = isUp ? animStore.raiseCard(card, 100)
         : animStore.lowerCard(card)
 
-    /* animatingCards[cardIndex] = animation
 
     animation.finished.then(() => {
-        animatingCards[cardIndex] = null
-    }) */
+        if (isUp) {
+            animStore.cardRotateBreathe(card, 5)
+        } else {
+            animStore.lowerCard(card)
+        }
+    })
 
 }
 
@@ -61,11 +61,12 @@ const animCard = (e, isUp) => {
 .container {
     display: flex;
     margin: 0 auto;
+    border: 1px dashed
 }
 
 .num-card {
-    width: 220px;
-    height: 400px;
+    min-width: 220px;
+    aspect-ratio: 11 / 20;
     border: solid;
     border-color: black;
     display: flex;
@@ -73,5 +74,10 @@ const animCard = (e, isUp) => {
     justify-content: center;
     font-size: 30px;
     margin: 5px;
+}
+
+.num-card:hover {
+    border: 8px solid var(--pp-lightred);
+    cursor: pointer;
 }
 </style>

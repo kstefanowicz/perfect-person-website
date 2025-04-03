@@ -4,10 +4,10 @@ import anime from 'animejs'
 
 export const useAnimStore = defineStore('anim', () => {
 
-    function raiseCard(card) {
+    function raiseCard(card, amount) {
         return anime({
             targets: card,
-            translateY: '-100px',
+            translateY: ("-" + amount + "px"),
             easing: 'easeOutExpo',
             duration: 400
         })
@@ -17,8 +17,24 @@ export const useAnimStore = defineStore('anim', () => {
         return anime({
             targets: card,
             translateY: '0px',
+            rotate: 0,
             easing: 'linear',
             duration: 400
+        })
+    }
+
+    function cardRotateBreathe(card, amount) {
+        return anime({
+            targets: card,
+            keyframes: [
+                { rotate: -amount },
+                { rotate: 0 },
+                { rotate: amount },
+                { rotate: 0 }
+            ],
+            easing: 'linear',
+            duration: 2000,
+            loop: true
         })
     }
 
@@ -51,5 +67,5 @@ export const useAnimStore = defineStore('anim', () => {
 
     }
 
-    return { raiseCard, lowerCard, showShowcase, hideShowcase }
+    return { raiseCard, lowerCard, cardRotateBreathe, showShowcase, hideShowcase }
 })
