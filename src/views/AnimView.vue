@@ -75,25 +75,15 @@ const clickCard = (e) => {
 const showAnimHeader = (dir) => {
     isHeaderAnimating.value = true;
 
-    dir ? anime({
+    anime({
         targets: showc.value,
-        height: "30vh",
-        easing: "easeOutQuad",
-        duration: 500,
+        height: dir ? "30vh" : "0",
+        easing: dir ? "easeOutQuad" : "easeInQuad",
+        duration: dir ? 500 : 300,
         complete: () => {
             isHeaderAnimating.value = false
         }
     })
-        : anime({
-            targets: showc.value,
-            height: "0",
-            easing: "easeInQuad",
-            duration: 300,
-            complete: () => {
-                isHeaderAnimating.value = false
-            }
-        })
-
 
 }
 
