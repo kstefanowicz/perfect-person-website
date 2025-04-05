@@ -17,7 +17,11 @@ const startX = ref(0)
 const dragX = ref(0)
 const dragStartTime = ref(0)
 
-// #region Drag - to - scroll
+const isHeaderAnimating = ref(false)
+
+const showc = ref(null)
+
+// #region Drag to scroll
 const startDrag = (e) => {
     isDragging.value = true
     startX.value = e.pageX
@@ -53,6 +57,9 @@ const handleWheel = (e) => {
 
 const clickCard = (e) => {
     console.log("Clicked", e.target.getAttribute('data-index'))
+    if (!isHeaderAnimating.value) {
+        showAnimHeader(true)
+    }
     anime({
         targets: e.target,
         rotate: 360,
@@ -60,8 +67,34 @@ const clickCard = (e) => {
         easing: 'easeOutExpo',
         complete: () => {
             e.target.rotation = 0
+
         }
     })
+}
+
+const showAnimHeader = (dir) => {
+    isHeaderAnimating.value = true;
+
+    dir ? anime({
+        targets: showc.value,
+        height: "30vh",
+        easing: "easeOutQuad",
+        duration: 500,
+        complete: () => {
+            isHeaderAnimating.value = false
+        }
+    })
+        : anime({
+            targets: showc.value,
+            height: "0",
+            easing: "easeInQuad",
+            duration: 300,
+            complete: () => {
+                isHeaderAnimating.value = false
+            }
+        })
+
+
 }
 
 const animCard = (e, isUp) => {
@@ -73,6 +106,10 @@ const animCard = (e, isUp) => {
 
     const animation = isUp ? animStore.raiseCard(card, 100)
         : animStore.lowerCard(card)
+
+    if (!isUp && !isHeaderAnimating.value) {
+        showAnimHeader(false)
+    }
 
 
     animation.finished.then(() => {
@@ -92,8 +129,11 @@ const animCard = (e, isUp) => {
     <header class="site-header">
         <SiteHeader />
     </header>
-    <div class="anim-header">
-        <h1>Playground for animation</h1>
+    <div class="anim-header" ref="showc">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=9JFkdro8Hl-boQqJ"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     <div class="container" ref="container" @mousedown="startDrag" @mousemove="moveDrag" @mouseup="endDrag"
         @mouseleave="endDrag" @wheel="handleWheel">
@@ -107,9 +147,10 @@ const animCard = (e, isUp) => {
 <style>
 @media (min-width: 1024px) {
     .anim-header {
-        min-height: 20vh;
+        height: 0;
         align-items: center;
-        margin: 0 auto
+        margin: 0 auto;
+        overflow-y: clip;
     }
 }
 
