@@ -38,14 +38,14 @@ export const useAnimStore = defineStore('anim', () => {
         })
     }
 
-    function showShowcase(el) {
+    function showShowcase(el, dir) {
         if (!el) return
 
         anime({
             targets: el,
-            translateY: [300, 0],
-            opacity: [0, 1],
-            easing: 'easeInOutBack',
+            height: dir ? "30vh" : "0",
+            easing: dir ? "easeOutQuad" : "easeInQuad",
+            opacity: dir ? [0, 1] : [1, 0],
             duration: 500
         })
 

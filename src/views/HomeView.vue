@@ -33,7 +33,7 @@ function handleCardClick(id) {
   // If unselecting, hide showcase
   if (id === selectionStore.selectedId || id < 0) {
     // console.log("HIDING showcase")
-    animStore.hideShowcase(showcaseContainer.value)
+    animStore.showShowcase(showcaseContainer.value, false)
 
     // wait for animation to finish before unselecting
     setTimeout(() => {
@@ -49,7 +49,7 @@ function handleCardClick(id) {
 
   // console.log("SHOWING showcase")
   if (!selectionStore.isShowcaseVisible) {
-    animStore.showShowcase(showcaseContainer.value)
+    animStore.showShowcase(showcaseContainer.value, true)
   }
 
   selectionStore.selectCard(id)
