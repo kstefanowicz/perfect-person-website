@@ -20,6 +20,7 @@ const props = defineProps({
 <style scoped>
 img {
     width: 100%;
+    min-width: 150px;
     height: auto;
     display: block;
 }
