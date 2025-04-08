@@ -1,12 +1,13 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useFirebaseStore } from './firebaseStore.js'
+import { eps } from '@/data/perfect_person_episodes_embed.js'
 
 export const useSelectionStore = defineStore('selection', () => {
 
   const firebaseStore = useFirebaseStore()
 
-  const episodes = computed(() => firebaseStore.episodesAll)
+  const episodes = eps //computed(() => firebaseStore.episodesAll)
   const selectedId = ref(-1)
   const isShowcaseVisible = ref(false)
 
@@ -19,7 +20,7 @@ export const useSelectionStore = defineStore('selection', () => {
 
   const selectedEpisode = computed(() => {
     if (selectedId.value < 0) return null
-    return episodes.value.find(ep => ep.id === selectedId.value)
+    return episodes.find(ep => ep.id === selectedId.value)
   })
 
   const isSelected = (id) => {
