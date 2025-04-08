@@ -112,12 +112,12 @@ const animCard = (e, isUp) => {
     overflow-x: auto;
     overflow-y: visible;
     scrollbar-width: none;
-    padding-top: 100px;
+    padding-top: 10px;
 }
 
 .podcast-card {
     aspect-ratio: 11 / 20;
-    width: 100%;
+    width: 200px;
     border: solid;
     border-color: black;
     display: block;
@@ -125,6 +125,7 @@ const animCard = (e, isUp) => {
 
     margin: 2px;
 }
+
 
 .podcast-card:hover {
     border: 8px solid var(--pp-lightred);
