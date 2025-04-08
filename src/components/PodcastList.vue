@@ -116,15 +116,14 @@ const animCard = (e, isUp) => {
 }
 
 .podcast-card {
-    min-width: 220px;
     aspect-ratio: 11 / 20;
     border: solid;
     border-color: black;
-    display: flex;
-    align-content: flex-end;
+    display: block;
+    padding-left: 2px;
     justify-content: center;
     font-size: 30px;
-    padding-left: 5%;
+
     margin: 5px;
 }
 

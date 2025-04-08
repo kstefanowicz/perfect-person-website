@@ -28,8 +28,8 @@ const thumbnails = computed(() => {
         <div v-if="podcastEpisode && podcastEpisode.thumbnail">
             <img :src="thumbnails[2]?.url" />
         </div>
-        <h5 class="podcast-ep-title color-blue"><strong>{{ podcastEpisode.title }}</strong></h5>
-        <p class="podcast-ep-length color-blue">{{ podcastEpisode.length }}</p>
+        <h3 class="podcast-ep-title color-blue"><strong>{{ podcastEpisode.title }}</strong></h3>
+        <p class="podcast-ep-length color-red">{{ podcastEpisode.length }}</p>
     </div>
 
 </template>

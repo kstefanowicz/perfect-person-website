@@ -34,8 +34,8 @@ const podCardHeight = ref('200px')
 
 .podcast-card {
     padding: 20px;
-    width: v-bind(podCardWidth);
-    height: v-bind(podCardHeight);
+    min-width: v-bind(podCardWidth);
+    min-height: v-bind(podCardHeight);
     border: 2px solid white;
 }
 
