@@ -41,7 +41,6 @@ onMounted(() => {
         </p>
         <div class="nav-links">
             <RouterLink to="/">Kevin</RouterLink>
-            <RouterLink to="ClaudeView">Claude</RouterLink>
             <RouterLink to="AnimView">Animation</RouterLink>
         </div>
     </div>
