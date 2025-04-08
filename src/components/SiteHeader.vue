@@ -39,10 +39,10 @@ onMounted(() => {
         <p>A flawless call in advice show about being perfect. Hosted by <strong class="highlight">Miles
                 Bonsignore</strong>
         </p>
-        <div class="nav-links">
+        <!-- <div class="nav-links">
             <RouterLink to="/">Kevin</RouterLink>
             <RouterLink to="AnimView">Animation</RouterLink>
-        </div>
+        </div> -->
     </div>
 </template>
 
