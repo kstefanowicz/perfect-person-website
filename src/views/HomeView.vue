@@ -6,6 +6,7 @@ import ShowcaseContainer from '@/components/ShowcaseContainer.vue'
 import { useSelectionStore } from '@/stores/selectionStore'
 import { useAnimStore } from '@/stores/animStore'
 import PodcastGrid from '@/components/PodcastGrid.vue'
+import PodcastList from '@/components/PodcastList.vue'
 
 const selectionStore = useSelectionStore()
 const animStore = useAnimStore()
@@ -65,6 +66,7 @@ function handleCardClick(id) {
       <ShowcaseContainer v-show="selectionStore.isShowcaseVisible" :key="selectionStore.selectedEpisode?.id"
         :podcast-episode="selectionStore.selectedEpisode" :class="['selected-ep-card']" @close="handleCardClick(-1)" />
     </div>
+    <PodcastList :handle-card-click="handleCardClick" />
     <PodcastGrid :handle-card-click="handleCardClick" />
   </main>
 
