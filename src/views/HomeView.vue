@@ -45,7 +45,7 @@ function handleCardClick(id) {
   // Else raise new card and show showcase
 
   // console.log("RAISING card with id ", id)
-  animStore.raiseCard(newSelectedCard, 100)
+  animStore.raiseCard(newSelectedCard, 10)
 
   // console.log("SHOWING showcase")
   if (!selectionStore.isShowcaseVisible) {
@@ -78,8 +78,9 @@ function handleCardClick(id) {
 main {
   align-items: center;
   margin: 0 auto;
-  padding-left: 5em;
-  padding-right: 4em;
+  padding: 0 1em;
+  height: calc(100vh - 100px);
+
 }
 
 .selected-ep-card {
@@ -90,6 +91,12 @@ main {
   border-style: solid;
   border-radius: 0.5em;
   border-color: var(--pp-darkred);
+}
+
+.selected-podcast-container {
+  display: flex;
+  z-index: v-bind('selectionStore.isShowcaseVisible ? 10 : -1');
+  align-items: center;
 }
 
 .site-header {

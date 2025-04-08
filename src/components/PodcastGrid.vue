@@ -11,25 +11,40 @@ const props = defineProps({
 const selectionStore = useSelectionStore()
 const animStore = useAnimStore()
 
-const podCardWidth = ref('300px')
-const podCardHeight = ref('200px')
+const podCardWidth = ref('200px')
+const podCardHeight = ref('150px')
 
 </script>
 
 <template>
-    <div class="podcast-grid">
-        <PodcastEp v-for="episode in selectionStore.episodes" :key="episode.id" :podcast-episode="episode"
-            :class="['podcast-card', { 'selected': selectionStore.isSelected(episode.id) }]" :data-id="episode.id"
-            @click="handleCardClick(episode.id)" />
+    <div class="podcast-grid-container">
+        <div class="podcast-grid">
+            <PodcastEp v-for="episode in selectionStore.episodes" :key="episode.id" :podcast-episode="episode"
+                :class="['podcast-card', { 'selected': selectionStore.isSelected(episode.id) }]" :data-id="episode.id"
+                @click="handleCardClick(episode.id)" />
+        </div>
     </div>
 </template>
 
 <style scoped>
+.podcast-grid-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
 .podcast-grid {
+    padding-top: 10px;
     display: grid;
     z-index: 1;
     grid-template-columns: repeat(auto-fill, minmax(v-bind(podCardWidth), 1fr));
+}
 
+
+@media (max-width: 800px) {
+    .podcast-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .podcast-card {
@@ -44,13 +59,6 @@ const podCardHeight = ref('200px')
     border: 4px solid var(--pp-lightred);
     border-radius: .5em;
     cursor: pointer
-}
-
-.selected-podcast-container {
-    display: flex;
-    z-index: v-bind('selectionStore.isShowcaseVisible ? 10 : -1');
-    align-items: center;
-    min-height: 400px;
 }
 
 .selected {

@@ -33,28 +33,50 @@ watchEffect(() => {
 <style scoped>
 .showcase-frame {
 
-    max-width: 80%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: right;
     overflow-y: clip;
+    gap: 1em;
+}
+
+.showcase-frame button {
+    align-self: flex-end;
 }
 
 .youtube-embed {
-    width: 100%;
+    width: 60%;
     max-width: 640px;
     min-height: 150px;
     background: black;
     aspect-ratio: 16 / 9;
 }
 
+@media (max-width: 800px) {
+    .showcase-frame {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .youtube-embed {
+        width: 100%;
+    }
+}
+
+
+
 iframe {
     width: 100%;
     height: 100%
 }
 
-.episode-card {
-    padding: 2em;
-}
+.episode-card {}
 </style>

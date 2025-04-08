@@ -17,4 +17,10 @@ const props = defineProps({
 
 </template>
 
-<style scoped></style>
+<style scoped>
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+</style>

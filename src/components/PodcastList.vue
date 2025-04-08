@@ -117,14 +117,13 @@ const animCard = (e, isUp) => {
 
 .podcast-card {
     aspect-ratio: 11 / 20;
+    width: 100%;
     border: solid;
     border-color: black;
     display: block;
-    padding-left: 2px;
     justify-content: center;
-    font-size: 30px;
 
-    margin: 5px;
+    margin: 2px;
 }
 
 .podcast-card:hover {
