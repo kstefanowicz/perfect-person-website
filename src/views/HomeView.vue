@@ -63,11 +63,11 @@ function handleCardClick(id) {
     <SiteHeader />
   </header>
   <main>
-    <ViewToggle />
     <div v-show="selectionStore.isShowcaseVisible" class="selected-podcast-container" ref="showcaseContainer">
       <ShowcaseContainer v-show="selectionStore.isShowcaseVisible" :key="selectionStore.selectedEpisode?.id"
         :podcast-episode="selectionStore.selectedEpisode" :class="['selected-ep-card']" @close="handleCardClick(-1)" />
     </div>
+    <ViewToggle />
     <PodcastGrid v-if="selectionStore.viewMode === 'grid'" :handle-card-click="handleCardClick" />
     <PodcastList v-else :handle-card-click="handleCardClick" />
   </main>
