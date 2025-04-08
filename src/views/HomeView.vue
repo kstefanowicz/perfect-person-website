@@ -7,6 +7,7 @@ import { useSelectionStore } from '@/stores/selectionStore'
 import { useAnimStore } from '@/stores/animStore'
 import PodcastGrid from '@/components/PodcastGrid.vue'
 import PodcastList from '@/components/PodcastList.vue'
+import ViewToggle from '@/components/ViewToggle.vue'
 
 const selectionStore = useSelectionStore()
 const animStore = useAnimStore()
@@ -62,12 +63,13 @@ function handleCardClick(id) {
     <SiteHeader />
   </header>
   <main>
+    <ViewToggle />
     <div v-show="selectionStore.isShowcaseVisible" class="selected-podcast-container" ref="showcaseContainer">
       <ShowcaseContainer v-show="selectionStore.isShowcaseVisible" :key="selectionStore.selectedEpisode?.id"
         :podcast-episode="selectionStore.selectedEpisode" :class="['selected-ep-card']" @close="handleCardClick(-1)" />
     </div>
-    <PodcastList :handle-card-click="handleCardClick" />
-    <PodcastGrid :handle-card-click="handleCardClick" />
+    <PodcastGrid v-if="selectionStore.viewMode === 'grid'" :handle-card-click="handleCardClick" />
+    <PodcastList v-else :handle-card-click="handleCardClick" />
   </main>
 
 </template>
