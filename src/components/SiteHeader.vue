@@ -7,6 +7,7 @@ const animTimer = Math.floor(Math.random() * 500 + 1600)
 
 const isPathVisible = ref(false)
 
+
 onMounted(() => {
     isPathVisible.value = false;
 
@@ -31,8 +32,8 @@ onMounted(() => {
 
 <template>
     <div class="title-header">
-        <svg class="title-svg" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
-            <g class="title-paths" transform="translate(-50,0) scale(4.5)" v-show="isPathVisible">
+        <svg class="title-svg" xmlns="http://www.w3.org/2000/svg">
+            <g class="title-paths" transform="scale(2.0)" v-show="isPathVisible">
                 <path v-for="(path, i) in titlePaths" :key="i" :d="path" />
             </g>
         </svg>
@@ -62,8 +63,15 @@ onMounted(() => {
 }
 
 .title-svg {
-    width: 80%;
-    height: 8em;
+    width: 50vw;
+    height: auto;
+}
+
+@media (max-width: 800px) {
+    .title-svg {
+        width: 100vw;
+        height: 10vh;
+    }
 }
 
 .highlight {
