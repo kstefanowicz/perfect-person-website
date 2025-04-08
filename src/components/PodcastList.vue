@@ -72,7 +72,7 @@ const animCard = (e, isUp) => {
 
     anime.remove(card)
 
-    const animation = isUp ? animStore.raiseCard(card, 100)
+    const animation = isUp ? animStore.raiseCard(card, 10)
         : animStore.lowerCard(card)
 
 
