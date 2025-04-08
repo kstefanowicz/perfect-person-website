@@ -4,13 +4,16 @@ import { useFirebaseStore } from './firebaseStore.js'
 
 export const useSelectionStore = defineStore('selection', () => {
 
-
   const firebaseStore = useFirebaseStore()
 
   const episodes = computed(() => firebaseStore.episodesAll)
   const selectedId = ref(-1)
   const isShowcaseVisible = ref(false)
+
   const viewMode = ref('grid')
+  const setViewMode = (mode) => {
+    viewMode.value = mode
+  }
 
   const showcaseContainer = ref(null)
 
@@ -40,5 +43,5 @@ export const useSelectionStore = defineStore('selection', () => {
 
   }
 
-  return { episodes, selectedId, isShowcaseVisible, viewMode, showcaseContainer, selectedEpisode, isSelected, selectCard }
+  return { episodes, setViewMode, selectedId, isShowcaseVisible, viewMode, showcaseContainer, selectedEpisode, isSelected, selectCard }
 })
